@@ -10,3 +10,5 @@ type Activity = {
     latitude: number
     longitude: number
 }
+
+
