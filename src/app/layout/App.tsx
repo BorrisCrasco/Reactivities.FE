@@ -3,10 +3,7 @@ import NavBar from "./NavBar";
 import { Outlet, useLocation } from "react-router";
 import HomePage from "../../features/home/HomePage";
 
-
-
 function App() {
-
   const location = useLocation();
 
   return (
@@ -21,7 +18,6 @@ function App() {
         </>
       )}
     </Box>
-
   )
 }
 

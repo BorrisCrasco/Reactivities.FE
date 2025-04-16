@@ -24,36 +24,33 @@ agent.interceptors.response.use(
         store.uiStore.isIdle()
         return response;
     },
-
     async error => {
         await sleep(1000);
-        store.uiStore.isIdle()
-        console.log('axios error: ' + error);
+        store.uiStore.isIdle();
 
         const { status, data } = error.response;
         switch (status) {
             case 400:
-                if(data.errors){
+                if (data.errors) {
                     const modalStateErrors = [];
-                    for(const key in data.errors){
-                        if(data.errors[key]){
+                    for (const key in data.errors) {
+                        if (data.errors[key]) {
                             modalStateErrors.push(data.errors[key]);
                         }
                     }
                     throw modalStateErrors.flat();
-                }
-                else{
+                } else {
                     toast.error(data);
                 }
                 break;
             case 401:
-                toast.error('unauthorised')
+                toast.error('Unauthorised');
                 break;
             case 404:
                 router.navigate('/not-found');
                 break;
             case 500:
-                router.navigate('/server-error',{state:{error:data}})
+                router.navigate('/server-error', {state: {error: data}})
                 break;
             default:
                 break;
@@ -62,6 +59,5 @@ agent.interceptors.response.use(
         return Promise.reject(error);
     }
 );
-
 
 export default agent;
